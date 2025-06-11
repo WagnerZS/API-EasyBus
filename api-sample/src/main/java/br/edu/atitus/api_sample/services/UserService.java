@@ -1,8 +1,24 @@
 package br.edu.atitus.api_sample.services;
 
-import br.edu.atitus.api_sample.entities.UserEntity;
+import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Service;
+
+import br.edu.atitus.api_sample.entities.UserEntity;
+import br.edu.atitus.api_sample.repositories.UserRepository;
+
+@Service
 public class UserService {
+	
+	private final UserRepository repository;
+	
+	public UserService(UserRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
+	private final String MODELO_EMAIL = "^[^@\\s]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
+	private final String MODELO_SENHA = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
 
 	public UserEntity save(UserEntity user) throws Exception {
 		if (user == null) {
@@ -14,25 +30,26 @@ public class UserService {
 		}
 		user.setName(user.getName().trim());
 
-		if (user.getEmail() == null || user.getEmail().isEmpty()) {
+		if (user.getEmail() == null || user.getEmail().isEmpty() || !Pattern.matches(MODELO_EMAIL, user.getEmail())) {
 			throw new Exception("Email inválido");
 		}
 		user.setEmail(user.getEmail().trim().toLowerCase());
-		//TODO validar a sintaxe do email (texto@texto.texto) => REGEX
-		
 
-		if (user.getPassword() == null || user.getPassword().isEmpty() || user.getPassword().length() < 8) {
+		if (user.getPassword() == null || user.getPassword().isEmpty() || !Pattern.matches(MODELO_SENHA, user.getPassword())) {
 			throw new Exception("Password inválido");
 		}
 		user.setPassword(user.getPassword());
-		//TODO Validar a força da senha (caracteres maiusculos, minusculos e numerais) => REGEX
 		
 		if (user.getType() == null) {
 			throw new Exception("Tipo de usuário inválido");
 		}
+		
+		if (repository.existsByEmail(user.getEmail())) {
+			throw new Exception("Já existe usuário cadastrado com este e-mail");
+		}
 
-		// TODO invocar metodo save da camada repository
-
+		repository.save(user);
+		
 		return user;
 	}
 
