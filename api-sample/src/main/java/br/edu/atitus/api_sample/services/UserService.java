@@ -2,6 +2,7 @@ package br.edu.atitus.api_sample.services;
 
 import java.util.regex.Pattern;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.atitus.api_sample.entities.UserEntity;
@@ -11,10 +12,12 @@ import br.edu.atitus.api_sample.repositories.UserRepository;
 public class UserService {
 	
 	private final UserRepository repository;
+	private final PasswordEncoder passwordEncoder;
 	
-	public UserService(UserRepository repository) {
+	public UserService(UserRepository repository, PasswordEncoder passwordEncoder) {
 		super();
 		this.repository = repository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	private final String MODELO_EMAIL = "^[^@\\s]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
@@ -47,7 +50,9 @@ public class UserService {
 		if (repository.existsByEmail(user.getEmail())) {
 			throw new Exception("Já existe usuário cadastrado com este e-mail");
 		}
-
+		
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		
 		repository.save(user);
 		
 		return user;
