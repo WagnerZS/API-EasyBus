@@ -19,9 +19,11 @@ public class ConfigSecurity {
 	@Bean
 	SecurityFilterChain getSecurity(HttpSecurity http, AuthTokenFilter filter) throws Exception {
 		http.csrf(csrf -> csrf.disable())
-			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			.authorizeHttpRequests(auth -> auth.requestMatchers("/ws**", "/ws/**").authenticated()
-			.anyRequest().permitAll())
+			.sessionManagement(session -> session
+					.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+			.authorizeHttpRequests(auth -> auth
+					.requestMatchers("/ws**", "/ws/**").authenticated()
+					.anyRequest().permitAll())
 			.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}

@@ -25,7 +25,6 @@ import br.edu.atitus.api_sample.services.UserService;
 public class AuthController {
 
     private final PasswordEncoder getPasswordEncoder;
-	
 	private final UserService service;
 	private final AuthenticationConfiguration authConfig;
 	

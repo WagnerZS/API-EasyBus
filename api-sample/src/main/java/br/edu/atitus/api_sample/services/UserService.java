@@ -14,6 +14,9 @@ import br.edu.atitus.api_sample.repositories.UserRepository;
 @Service
 public class UserService implements UserDetailsService{
 	
+	private final String MODELO_EMAIL = "^[^@\\s]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
+	private final String MODELO_SENHA = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
+	
 	private final UserRepository repository;
 	private final PasswordEncoder passwordEncoder;
 	
@@ -22,9 +25,6 @@ public class UserService implements UserDetailsService{
 		this.repository = repository;
 		this.passwordEncoder = passwordEncoder;
 	}
-
-	private final String MODELO_EMAIL = "^[^@\\s]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
-	private final String MODELO_SENHA = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
 
 	public UserEntity save(UserEntity user) throws Exception {
 		if (user == null) {
