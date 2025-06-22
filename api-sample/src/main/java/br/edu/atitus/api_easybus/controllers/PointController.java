@@ -1,4 +1,4 @@
-package br.edu.atitus.api_sample.controllers;
+package br.edu.atitus.api_easybus.controllers;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.atitus.api_sample.dtos.PointDTO;
-import br.edu.atitus.api_sample.entities.PointEntity;
-import br.edu.atitus.api_sample.services.PointService;
+import br.edu.atitus.api_easybus.dtos.PointDTO;
+import br.edu.atitus.api_easybus.entities.PointEntity;
+import br.edu.atitus.api_easybus.services.PointService;
 
 @RestController
 @RequestMapping("/ws/point")
@@ -56,6 +57,12 @@ public class PointController {
 	public ResponseEntity<String> delete(@PathVariable(required = true) UUID id) throws Exception{
 		service.deleteById(id);
 		return ResponseEntity.ok("Ponto removido com sucesso!");
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<PointEntity> update(@PathVariable(required = true) UUID id, @RequestBody PointDTO dto) throws Exception{
+		PointEntity point = service.update(id, dto);
+		return ResponseEntity.ok(point);
 	}
 	
 	@ExceptionHandler(value = Exception.class)

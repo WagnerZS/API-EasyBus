@@ -1,4 +1,4 @@
-package br.edu.atitus.api_sample.services;
+package br.edu.atitus.api_easybus.services;
 
 import java.util.regex.Pattern;
 
@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.edu.atitus.api_sample.entities.UserEntity;
-import br.edu.atitus.api_sample.repositories.UserRepository;
+import br.edu.atitus.api_easybus.entities.UserEntity;
+import br.edu.atitus.api_easybus.repositories.UserRepository;
 
 @Service
 public class UserService implements UserDetailsService{

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.edu.atitus</groupId>
-	<artifactId>api-sample</artifactId>
+	<artifactId>api-easybus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>api-sample</name>
-	<description>Demo project for Spring Boot</description>
+	<name>api-easybus</name>
+	<description>API da aplicação EasyBus</description>
 	<url/>
 	<licenses>
 		<license/>

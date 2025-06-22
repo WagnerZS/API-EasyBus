@@ -1,4 +1,4 @@
-package br.edu.atitus.api_sample.controllers;
+package br.edu.atitus.api_easybus.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

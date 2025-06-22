@@ -1,4 +1,4 @@
-package br.edu.atitus.api_sample.components;
+package br.edu.atitus.api_easybus.components;
 
 import java.util.Date;
 

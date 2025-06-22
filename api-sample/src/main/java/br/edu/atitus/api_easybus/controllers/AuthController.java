@@ -1,4 +1,4 @@
-package br.edu.atitus.api_sample.controllers;
+package br.edu.atitus.api_easybus.controllers;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.atitus.api_sample.components.JWTUtils;
-import br.edu.atitus.api_sample.dtos.SigninDTO;
-import br.edu.atitus.api_sample.dtos.SignupDTO;
-import br.edu.atitus.api_sample.entities.UserEntity;
-import br.edu.atitus.api_sample.entities.UserType;
-import br.edu.atitus.api_sample.services.UserService;
+import br.edu.atitus.api_easybus.components.JWTUtils;
+import br.edu.atitus.api_easybus.dtos.SigninDTO;
+import br.edu.atitus.api_easybus.dtos.SignupDTO;
+import br.edu.atitus.api_easybus.entities.UserEntity;
+import br.edu.atitus.api_easybus.entities.UserType;
+import br.edu.atitus.api_easybus.services.UserService;
 
 @RestController
 @RequestMapping("/auth")

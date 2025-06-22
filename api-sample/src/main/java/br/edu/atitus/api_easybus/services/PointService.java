@@ -1,14 +1,16 @@
-package br.edu.atitus.api_sample.services;
+package br.edu.atitus.api_easybus.services;
 
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import br.edu.atitus.api_sample.entities.PointEntity;
-import br.edu.atitus.api_sample.entities.UserEntity;
-import br.edu.atitus.api_sample.repositories.PointRepository;
+import br.edu.atitus.api_easybus.dtos.PointDTO;
+import br.edu.atitus.api_easybus.entities.PointEntity;
+import br.edu.atitus.api_easybus.entities.UserEntity;
+import br.edu.atitus.api_easybus.repositories.PointRepository;
 
 @Service
 public class PointService {
@@ -60,6 +62,19 @@ public class PointService {
 	public List<PointEntity> findByUser() {
 		UserEntity userAuth = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return repository.findByUser(userAuth);
+	}
+	
+	public PointEntity update(UUID id, PointDTO dto) throws Exception {
+		var point = repository.findById(id)
+				.orElseThrow(() -> new Exception("Não existe ponto cadastrado com este ID"));
+		
+		UserEntity userAuth = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		if (!point.getUser().getId().equals(userAuth.getId()))
+			throw new Exception("Você não tem permissão para apagar este registro");
+		
+		BeanUtils.copyProperties(dto, point);
+		return repository.save(point);
 	}
 	
 }

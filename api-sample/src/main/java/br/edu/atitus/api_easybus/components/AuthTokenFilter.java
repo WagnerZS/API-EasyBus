@@ -1,4 +1,4 @@
-package br.edu.atitus.api_sample.components;
+package br.edu.atitus.api_easybus.components;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.edu.atitus.api_sample.services.UserService;
+import br.edu.atitus.api_easybus.services.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
