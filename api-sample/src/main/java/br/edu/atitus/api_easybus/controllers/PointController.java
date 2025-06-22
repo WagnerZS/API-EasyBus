@@ -34,13 +34,13 @@ public class PointController {
 	}
 	
 	@GetMapping()
-	public ResponseEntity<List<PointEntity>> findAll(){
-		return ResponseEntity.ok(service.findAll());
-	}
-	
-	@GetMapping("/byUser")
 	public ResponseEntity<List<PointEntity>> findByUser(){
 		return ResponseEntity.ok(service.findByUser());
+	}
+	
+	@GetMapping("/findAll")
+	public ResponseEntity<List<PointEntity>> findAll(){
+		return ResponseEntity.ok(service.findAll());
 	}
 
 	@PostMapping()
