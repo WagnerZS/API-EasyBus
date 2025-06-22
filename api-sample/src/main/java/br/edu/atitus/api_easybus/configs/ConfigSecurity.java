@@ -2,6 +2,7 @@ package br.edu.atitus.api_easybus.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +23,7 @@ public class ConfigSecurity {
 			.sessionManagement(session -> session
 					.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
+					.requestMatchers(HttpMethod.OPTIONS).permitAll()
 					.requestMatchers("/ws**", "/ws/**").authenticated()
 					.anyRequest().permitAll())
 			.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
@@ -33,7 +35,7 @@ public class ConfigSecurity {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+				registry.addMapping("/**").allowedOrigins("*");
 			}
 		};
 	}
